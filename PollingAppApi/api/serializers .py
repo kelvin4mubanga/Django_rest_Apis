@@ -1,13 +1,9 @@
 from rest_framework import serializers
-from .models import 
-    Poll, PollOption, Vote
+from .models import Poll, PollOption, Vote
 
-
-
-
-
-# Polling app serializers
 class PollSerializer(serializers.ModelSerializer):
+    created_by = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = Poll
         fields = '__all__'
@@ -18,6 +14,8 @@ class PollOptionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class VoteSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = Vote
         fields = '__all__'
